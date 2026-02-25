@@ -3,9 +3,15 @@ Chiplet Network Thermal co-simulation
 
 
 ## Docker usage
-Mount repo folder with the docker file system 
-```docker run -it -u houy4 -v [repo path on host]:[repo path on docker] [image]```
+A docker has been built for the simulator which can be pulled by
+```
+docker pull langleyhou/epic-cntsim-gem5:latest
+```
+When using the docker, the mount of this repo folder and the 
+Mount repo folder with the docker ```/tmp``` folder is recommanded. The compiled Gem5 will be kept in local file system, hence it is ok the file on docker been cleared after the system has been terminated. With ```/tmp``` folder, you will not encounter the permission problem. 
 
+Set the environment of ```$PATH``` so that ```gem5.opt``` command can work properly without using full build path. 
 ```
-docker run -it -u $(id -u):$(id -g) -v /home/houy4/workspace/envs/chipSim/gem5:/opt/gem5 -v /home/houy4/workspace/chipSim:/tmp/chipSim -e PATH=/opt/gem5/build/ALL:$PATH  gem5sim:ubuntu-24.04
+docker run -it -u $(id -u):$(id -g) -v [PATH-OF-CNTSIM]:/tmp/cntcim -e PATH=/opt/gem5/build/ALL:$PATH [IMAGE NAME]
 ```
+```[IMAGE NAME]``` is supposed to be ```langleyhou/epic-cntsim-gem5:latest``` up to now.
